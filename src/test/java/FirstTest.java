@@ -17,7 +17,7 @@ public class FirstTest {
 //        driver.findElement(By.id("gsc-i-id1")).sendKeys("Pienas");
 //        driver.findElement(By.className("gsc-search-button gsc-search-button-v2")).click();
 //        driver.quit();
-    }
+//    }
 
     @Test
     void ex1() throws InterruptedException {
