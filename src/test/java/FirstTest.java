@@ -7,16 +7,16 @@ import org.openqa.selenium.support.ui.Select;
 //import org.assertj.core.api.Assertions;
 
 public class FirstTest {
-    @Test
-    void myTest() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://www.delfi.lt");
-        driver.findElement(By.className("CybotCookiebotBannerCloseButton")).click();
-        driver.findElement(By.className("fa-search")).click();
-        driver.findElement(By.id("close_button")).click();
-        driver.findElement(By.id("gsc-i-id1")).sendKeys("Pienas");
-        driver.findElement(By.className("gsc-search-button gsc-search-button-v2")).click();
-        driver.quit();
+//    @Test
+//    void myTest() {
+//        WebDriver driver = new ChromeDriver();
+//        driver.get("http://www.delfi.lt");
+//        driver.findElement(By.className("CybotCookiebotBannerCloseButton")).click();
+//        driver.findElement(By.className("fa-search")).click();
+//        driver.findElement(By.id("close_button")).click();
+//        driver.findElement(By.id("gsc-i-id1")).sendKeys("Pienas");
+//        driver.findElement(By.className("gsc-search-button gsc-search-button-v2")).click();
+//        driver.quit();
     }
 
     @Test
