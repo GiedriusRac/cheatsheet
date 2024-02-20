@@ -91,4 +91,40 @@ public class TestWebsite {
         Assertions.assertTrue(isAdded3);
         System.out.println("Test [addtoCart] = Backpack is added (test 3): " + isAdded);
     }
+
+    @Test
+    void removeFromCart() throws InterruptedException {
+        // Username
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+
+        // Password
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+
+        // Log in
+        driver.findElement(By.id("login-button")).click();
+
+        // Add to cart
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+
+        // Remove from cart
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+
+        // Check if removed 1
+        boolean isRemoved = driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).isDisplayed();
+        Assertions.assertTrue(isRemoved);
+        System.out.println("Test [removeFromCart] = Backpack is removed (test 1): " + isRemoved);
+
+        // Add to cart
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+
+        // Remove from cart (2nd option)
+        driver.findElement(By.className("shopping_cart_link")).click();
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+
+        // Check if removed 2
+        driver.findElement(By.id("continue-shopping")).click();
+        boolean isRemoved2 = driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).isDisplayed();
+        Assertions.assertTrue(isRemoved2);
+        System.out.println("Test [removeFromCart] = Backpack is removed (test 2): " + isRemoved2);
+    }
 }
