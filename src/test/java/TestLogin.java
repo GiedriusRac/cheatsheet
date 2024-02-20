@@ -26,24 +26,36 @@ public class TestLogin {
     @ParameterizedTest
     @ValueSource(strings = {"user_credentials.txt"})
     void ex1() throws InterruptedException {
-        // 2
+        // Username
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
 
-        // 3
+        // Password
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
+
+        // Log in
         driver.findElement(By.id("login-button")).click();
 
-        // 4
+        // Logged in
         boolean loggedIn = driver.findElement(By.className("shopping_cart_link")).isDisplayed();
         Assertions.assertTrue(loggedIn);
         System.out.println("Logged in: " + loggedIn);
 
-        // Logout
-        driver.findElement(By.id("react-burger-menu-btn")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.linkText("Logout")).click();
-        boolean loggedOut = driver.findElement(By.id("login-button")).isDisplayed();
-        Assertions.assertTrue(loggedOut);
-        System.out.println("Logged out: " + loggedOut);
+        // Add to cart
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+
+        // Check if added 1
+        boolean isAdded = driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed();
+        Assertions.assertTrue(isAdded);
+        System.out.println("Backpack is added: " + isAdded);
+
+//        // Open nav
+//        driver.findElement(By.id("react-burger-menu-btn")).click();
+//        Thread.sleep(1000);
+
+//        // Log out
+//        driver.findElement(By.linkText("Logout")).click();
+//        boolean loggedOut = driver.findElement(By.id("login-button")).isDisplayed();
+//        Assertions.assertTrue(loggedOut);
+//        System.out.println("Logged out: " + loggedOut);
     }
 }
