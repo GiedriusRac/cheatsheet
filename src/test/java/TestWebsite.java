@@ -36,7 +36,7 @@ public class TestWebsite {
         // Logged in
         boolean loggedIn = driver.findElement(By.className("shopping_cart_link")).isDisplayed();
         Assertions.assertTrue(loggedIn);
-        System.out.println("Test 1 -> Logged in: " + loggedIn);
+        System.out.println("Test login = Logged in: " + loggedIn);
     }
 
     @Test
@@ -58,6 +58,37 @@ public class TestWebsite {
         driver.findElement(By.linkText("Logout")).click();
         boolean loggedOut = driver.findElement(By.id("login-button")).isDisplayed();
         Assertions.assertTrue(loggedOut);
-        System.out.println("Logged out: " + loggedOut);
+        System.out.println("Test [logout] = Logged out: " + loggedOut);
+    }
+
+    @Test
+    void addToCart() {
+        // Username
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+
+        // Password
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+
+        // Log in
+        driver.findElement(By.id("login-button")).click();
+
+        // Add to cart
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+
+        // Check if added 1
+        boolean isAdded = driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed();
+        Assertions.assertTrue(isAdded);
+        System.out.println("Test [addtoCart] = Backpack is added (test 1): " + isAdded);
+
+        // Check if added 2
+        boolean isAdded2 = driver.findElement(By.className("shopping_cart_badge")).isDisplayed();
+        Assertions.assertTrue(isAdded2);
+        System.out.println("Test [addtoCart] = Backpack is added (test 2): " + isAdded2);
+
+        // Check if added 3
+        driver.findElement(By.className("shopping_cart_link")).click();
+        boolean isAdded3 = driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed();
+        Assertions.assertTrue(isAdded3);
+        System.out.println("Test [addtoCart] = Backpack is added (test 3): " + isAdded);
     }
 }
