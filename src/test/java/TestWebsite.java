@@ -1,9 +1,11 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class TestWebsite {
@@ -16,10 +18,10 @@ public class TestWebsite {
         driver.get("https://www.saucedemo.com");
     }
 
-//        @AfterEach
-//    void close() {
-//        driver.quit();
-//    }
+    @AfterEach
+    void close() {
+        driver.quit();
+    }
 
 
     @Test
@@ -126,5 +128,47 @@ public class TestWebsite {
         boolean isRemoved2 = driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).isDisplayed();
         Assertions.assertTrue(isRemoved2);
         System.out.println("Test [removeFromCart] = Backpack is removed (test 2): " + isRemoved2);
+    }
+
+    @Test
+    void purchaseFlow() {
+        // Username
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+
+        // Password
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+
+        // Log in
+        driver.findElement(By.id("login-button")).click();
+
+        // Add to cart
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+
+        // Head to Cart
+        driver.findElement(By.className("shopping_cart_link")).click();
+
+        // Head to Checkout
+        driver.findElement(By.id("checkout")).click();
+
+        // First Name
+        driver.findElement(By.id("first-name")).sendKeys("Name");
+
+        // Last Name
+        driver.findElement(By.id("last-name")).sendKeys("Surname");
+
+        // Zip/Postal Code
+        driver.findElement(By.id("postal-code")).sendKeys("LT-12345");
+
+        // Continue
+        driver.findElement(By.id("continue")).click();
+
+        // Finish
+        driver.findElement(By.id("finish")).click();
+
+        // Check if order is complete
+        boolean isCompleted = driver.findElement(By.id("back-to-products")).isDisplayed();
+        Assertions.assertTrue(isCompleted);
+        System.out.println("Test [purchaseFlow] = Purchase is complete: " + isCompleted);
+        driver.findElement(By.id("back-to-products")).click();
     }
 }
