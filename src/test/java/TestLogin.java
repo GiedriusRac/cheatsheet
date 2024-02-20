@@ -18,14 +18,14 @@ public class TestLogin {
         driver.get("https://www.saucedemo.com");
     }
 
-    @AfterEach
-    void close() {
-        driver.quit();
-    }
+//    @AfterEach
+//    void close() {
+//        driver.quit();
+//    }
 
     @ParameterizedTest
     @ValueSource(strings = {"user_credentials.txt"})
-    void ex1() {
+    void ex1() throws InterruptedException {
         // 2
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
 
@@ -37,5 +37,13 @@ public class TestLogin {
         boolean loggedIn = driver.findElement(By.className("shopping_cart_link")).isDisplayed();
         Assertions.assertTrue(loggedIn);
         System.out.println("Logged in: " + loggedIn);
+
+        // Logout
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.linkText("Logout")).click();
+        boolean loggedOut = driver.findElement(By.id("login-button")).isDisplayed();
+        Assertions.assertTrue(loggedOut);
+        System.out.println("Logged out: " + loggedOut);
     }
 }
